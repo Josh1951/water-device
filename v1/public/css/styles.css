@@ -4,6 +4,12 @@ body {
   background: #a8c0ff;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #3f2b96, #a8c0ff);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,53,121,0.9672911400888481) 0%, rgba(0,212,255,1) 100%);
+color: #fff;
+}
+
+h1{
+    margin: 10px;
+    width: 100%;
 }
 
 h2,
@@ -21,3 +27,78 @@ p {
   margin: 10px;
   text-align: left;
 }
+
+img {
+    height: 100px;
+    width: 100px;
+    margin: auto;
+}
+
+#heading {
+    background-color: rgba(0,0,0,0);
+}
+
+#water {
+    margin-top: 2%;
+}
+
+.card {
+    color: #000;
+    padding-top: 10px;
+}
+
+/*effects*/
+
+/* Pulse */
+@-webkit-keyframes hvr-pulse {
+  25% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+}
+@keyframes hvr-pulse {
+  25% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+}
+.hvr-pulse {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.hvr-pulse:hover, .hvr-pulse:focus, .hvr-pulse:active {
+  -webkit-animation-name: hvr-pulse;
+  animation-name: hvr-pulse;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+/* Ripple effect */
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+.ripple:hover {
+  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+}
+.ripple:active {
+  background-color: #6eb9f7;
+  background-size: 100%;
+  transition: background 0s;
+}
+
