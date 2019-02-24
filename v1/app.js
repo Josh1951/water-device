@@ -19,6 +19,10 @@ app.get("/index", function(req, res){
     res.render("dashboard");
 });
 
+app.post("/telemetry", function(req, res){
+    console.log(telemetry);
+});
+
 //tell express to listen for requests
 app.listen(process.env.PORT || 3000, function(){
     console.log("rain server has started");
