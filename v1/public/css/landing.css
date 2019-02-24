@@ -1,0 +1,24 @@
+html, body, canvas {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+}
+body {
+background: #a8c0ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3f2b96, #a8c0ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,53,121,0.9672911400888481) 0%, rgba(0,212,255,1) 100%);
+
+}
+
+canvas {
+	z-index: 0;
+	
+}
+
+#landing-header {
+	z-index: 99;
+	position: relative;
+	text-align: center;
+	padding-top: 40vh;
+}
+
