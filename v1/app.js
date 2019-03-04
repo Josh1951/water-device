@@ -2,6 +2,7 @@
 var bodyParser = require("body-parser"),
     mongoose   = require("mongoose"),
     express    = require("express"),
+    request     =require("request"),
     app        = express();
     
 //config bodyparser, share public directory across app, set view engine    
@@ -10,7 +11,7 @@ app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 
 //Connect to DB
-mongoose.connect('mongodb://localhost:27017/dev-project', { useNewUrlParser: true }); 
+//mongoose.connect('mongodb://localhost:27017/dev-project', { useNewUrlParser: true }); 
 
 //Schema Setup
 var telemetrySchema = new mongoose.Schema({
@@ -20,19 +21,9 @@ var telemetrySchema = new mongoose.Schema({
 
 var Telemetry = mongoose.model("Telemetry", telemetrySchema);
 
-// Telemetry.create(
-//     {
-//         moisture: 10, 
-//         time: 1922
-//     }, function(err, telemetry){
-//         if(err)
-//         {
-//             console.log(err);
-//         } else {
-//             console.log("Newly created record: ");
-//             console.log(telemetry);
-//     }
-// });
+Telemetry.create({
+         
+ });
 
 //Routes    
 app.get("/", function(req, res){
@@ -45,17 +36,22 @@ app.get("/", function(req, res){
 
 app.get("/index", function(req, res){
     //get all campgrounds from db
-    Telemetry.find({}, function(err, allReadings){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("dashboard", {telemetry: allReadings});
-        }
-    });
+    //Telemetry.find({}, function(err, allReadings){
+       // if(err){
+       //     console.log(err);
+       // } else {
+            res.render("dashboard");
+        //}
+    //});
 });
 
-app.post("/telemetry", function(req, res){
-    console.log(tel);
+app.get("/telemetry/:reading", function(req, res){
+    var reading = req.params;
+    console.log(reading);
+    var d = new Date;
+    var n = d.getTime();
+    
+    console.log(n);
 });
 
 //tell express to listen for requests
