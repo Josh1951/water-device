@@ -1,6 +1,7 @@
 //require modules
 var bodyParser = require("body-parser"),
     mongoose   = require("mongoose"),
+    moment     = require("moment"),
     express    = require("express"),
     request     =require("request"),
     app        = express();
@@ -11,7 +12,7 @@ app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 
 //Connect to DB
-//mongoose.connect('mongodb://localhost:27017/dev-project', { useNewUrlParser: true }); 
+mongoose.connect('mongodb://localhost:27017/dev-project', { useNewUrlParser: true }); 
 
 //Schema Setup
 var telemetrySchema = new mongoose.Schema({
@@ -21,37 +22,30 @@ var telemetrySchema = new mongoose.Schema({
 
 var Telemetry = mongoose.model("Telemetry", telemetrySchema);
 
-Telemetry.create({
-         
- });
-
 //Routes    
 app.get("/", function(req, res){
     res.render("landing");
 });
 
-//app.get("/index", function(req, res){
-//    res.render("dashboard");
-//});
-
 app.get("/index", function(req, res){
-    //get all campgrounds from db
-    //Telemetry.find({}, function(err, allReadings){
-       // if(err){
-       //     console.log(err);
-       // } else {
-            res.render("dashboard");
-        //}
-    //});
+    res.render("dashboard");
 });
 
 app.get("/telemetry/:reading", function(req, res){
-    var reading = req.params;
-    console.log(reading);
+    var reading = req.params.reading;
     var d = new Date;
     var n = d.getTime();
+    var newReading = {moisture: reading, time: n};
     
-    console.log(n);
+    Telemetry.create(newReading, function(err, newlyCreated){
+        if(err)
+        {
+            console.log(err);
+        } else 
+        {
+            console.log(newlyCreated);
+        }
+    });
 });
 
 //tell express to listen for requests
