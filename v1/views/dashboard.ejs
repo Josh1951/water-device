@@ -10,15 +10,7 @@
 
 <div id="main" class="container">
     <div class="row">
-        <div class="col-4">
-            <div class="card">
-                <img src="https://apps.shopifycdn.com/listing_images/8c2113193afda0376534f7e30d691899/icon/25d428fe4ff39b1cef8551342b31af3b.jpg">
-                <div class="card-body">
-                    <p class="card-text"><%= time %></p>
-                    <p class="card-text">Moisture: <%= reading %></p>
-                </div>
-            </div>
-        </div>
+        
         <div class="col-4">
             <div class="card">
                 <img src="https://apps.shopifycdn.com/listing_images/8c2113193afda0376534f7e30d691899/icon/25d428fe4ff39b1cef8551342b31af3b.jpg">
@@ -27,18 +19,42 @@
                 </div>
             </div>
         </div>
+        
+        <div class="col-4">
+            <% if(readings[0].status == 'wet') { %>
+            <div class="card text-center">
+                <h2>Your plant is watered!</h2>
+                <iframe src="https://giphy.com/embed/poSqCkhLQcX3q" width="342" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                <div class="card-body justify-content-center">
+                    <p class="card-text text-center">Time of reading: <%= readings[0].time %> </p>
+                </div>
+            </div>
+            <% } else { %>
+            
+            <!--STATUS IS DRY-->
+            <div class="card text-center">
+                <h2>Your plant is dry.</h2>
+                <iframe src="https://giphy.com/embed/l378ayM0PpEP72zVC" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                <div class="card-body justify-content-center">
+                    <p class="card-text text-center">Time of reading: <%= readings[0].time %> </p>
+                </div>
+            </div>
+            <% } %>
+        </div>
+        
         <div class="col-4">
             <div class="card">
                 <img src="https://apps.shopifycdn.com/listing_images/8c2113193afda0376534f7e30d691899/icon/25d428fe4ff39b1cef8551342b31af3b.jpg">
                 <div class="card-body">
-                    <p class="card-text">History.</p>
+                    <p class="card-text">Time: <%= readings[0].time %></p>
+                    <p class="card-text">Moisture: <%= readings[0].reading %></p>
                 </div>
             </div>
         </div>
         
-        <form id="waterPost" action="/water" method="POST">
-            <button id="water" type="button" class="ripple hvr-pulse btn btn-primary btn-lg btn-block">Water Now!</button>
-        </form>
+            <form id="waterPost" action="/water" method="POST">
+                <button id="water" type="button" class="ripple hvr-pulse btn btn-primary btn-lg btn-block">Water Now!</button>
+            </form>
         
     </div>
 </div>
