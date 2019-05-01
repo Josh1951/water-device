@@ -5,16 +5,18 @@ var bodyParser = require("body-parser"),
     express    = require("express"),
     app        = express();
     
-mongoose.connect('mongodb://localhost:27017/devproject', { useNewUrlParser: true }); 
+mongoose.connect('mongodb://webserver:watering123@ds253783.mlab.com:53783/dev_project', { useNewUrlParser: true }); 
+
 
 var readingSchema = new mongoose.Schema({
     time: String,
     reading: Number,
-    status: String
+    status: String,
+    waterRequest: String
 });
 
 var Reading = mongoose.model("Reading", readingSchema);
-    
+
 //config bodyparser, share public directory across app, set view engine    
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
@@ -32,14 +34,14 @@ app.get("/index", function(req, res){
         } else {
         res.render("dashboard", {readings: allReadings}); 
         }
-    }).sort({time: -1}).limit(5);
+    }).sort({_id: -1}).limit(1);
 });
 
 //RECEIVE DATA IN GET REQUEST, SAVE TO DATABASE.
 app.get("/telemetry/:reading", function(req, res){
     var reading = req.params.reading;
     var d = new Date;
-    var n = moment(d.getTime()).format("DD/MM/YY hh:mm");
+    var n = moment(d.getTime()).format("DD/MM/YY hh:mm:ss");
     var status;
     
     if(reading < 1){
@@ -53,11 +55,22 @@ app.get("/telemetry/:reading", function(req, res){
     Reading.create({
         time: n,
         reading: reading,
-        status: status
+        status: status,
+        waterRequest: 'false'
     });
 });
 
-app.post("/water", function(req, res){
+app.get("/water", function(req, res){
+    var d = new Date;
+    var n = moment(d.getTime()).format("DD/MM/YY hh:mm:ss");
+    
+    Reading.create({
+        time: n,
+        reading: 1,
+        status: 'dry',
+        waterRequest: 'true'
+    });
+    
     console.log("Watering plant!");
     res.redirect("/index");
 });

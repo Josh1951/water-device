@@ -46,15 +46,13 @@
             <div class="card">
                 <img src="https://apps.shopifycdn.com/listing_images/8c2113193afda0376534f7e30d691899/icon/25d428fe4ff39b1cef8551342b31af3b.jpg">
                 <div class="card-body">
-                    <p class="card-text">Time: <%= readings[0].time %></p>
-                    <p class="card-text">Moisture: <%= readings[0].reading %></p>
+                    <p class="card-text"></p>
                 </div>
             </div>
         </div>
         
-            <form id="waterPost" action="/water" method="POST">
-                <button id="water" type="button" class="ripple hvr-pulse btn btn-primary btn-lg btn-block">Water Now!</button>
-            </form>
+        <!--Watering now-->
+        <a href="/water" class="ripple hvr-pulse btn btn-primary btn-lg btn-block my-4">Water Now!</a>
         
     </div>
 </div>
